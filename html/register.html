@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>CoinVault</header>
+    <div class="nav">
+        <a href="landing.html">Home</a>
+        <a href="login.html">Login</a>
+        <a class="active">Register</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    <h1>Registration</h1>
+    <form method="post" id="myRegistration">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Number: +63 </span>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required="">
+        </div>
+        <span id="message"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Password: </span>
+            <input type="password" name="inputPass" id="inputPass" required="">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Confirm Password: </span>
+            <input type="password" name="inputPass1" id="inputPass1"  required="">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">First Name</span>
+            <input type="text" name="firstName" id="firstName" required="">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Last Name</span>
+            <input type="text" name="lastName" id="lastName" required="">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Email</span>
+            <input type="email" name="inputEmail" placeholder="example@example.com" required="">
+        </div>
+        <button type="submit" class="btn btn-primary" name="register" id="register">Register</button>
+    </form>
+    <footer>Kaye Aizerner Evangelista<br>Bachelor of Science in Computer Science - 2nd Year</footer>
+</body>
+</html>
