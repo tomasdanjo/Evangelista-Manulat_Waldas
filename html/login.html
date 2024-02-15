@@ -22,11 +22,17 @@
         <a href="contact.html">Contact Us</a>
       </div>
     <form action="">
-        <label for="numberOrEmail">number or email: </label>
-        <input type="text">
-        <label for="password">Password: </label>
-        <input type="password">
-        <input type="submit">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"></span>
+            <input type="text" class="form-control" placeholder="Phone number or Email" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+          
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"></span>
+            <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Log In">
     </form>
     <footer>
         <h4>Thomas Danjo Manulat</h4>
