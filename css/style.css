@@ -1,0 +1,204 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: 		#fedc32;
+    
+    display: flex;
+    flex-direction: column;
+  }
+
+.nav header {
+    margin-right: auto;
+    font-family: "Monoton", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 60px;
+  padding-left: 5%;
+}
+
+.nav {
+    
+    overflow: visible;
+    display: flex;
+    margin-top: 20px;
+    padding-right: 2%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .nav a {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    float: left;
+    color: rgb(39, 39, 39);
+    text-align: center;
+    padding: 14px 16px;
+    margin-left: 0.5%;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-size: 20px;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 10px;
+  }
+  
+  /* Change the color of links on hover */
+  .nav a:hover {
+    background-color: #000000;
+    color: white;
+  }
+  
+  /* Add a color to the active/current link */
+  .nav a.active {
+    color: #242425;
+    text-decoration: underline;
+    text-decoration-thickness: 5px;
+  }
+
+  .centercard {
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 6%;
+  }
+
+  .waldasCard {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
+    transition: 0.3s;
+    border-radius: 30px;
+    width: 400px;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    background-color: #272829;
+    color: white;
+    margin-top: 40px;
+    margin-right: 200px;
+  }
+
+  
+  /* On mouse-over, add a deeper shadow */
+  .waldasCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,1);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .container h3 {
+    font-family: "Monoton", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 30px;
+  }
+
+  .acctNum {
+    display: flex;
+    color: gray;
+    justify-content: center;
+  }
+
+  .desc {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding: 5%;
+  }
+
+  .desc h2{
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 60px;
+  }
+
+  .desc {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    padding: 5%;
+  }
+
+  .center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+  }
+
+  .footer {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-footer {
+    display:contents;
+  }
+
+  .contactcard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2%;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  .card {
+    width: 400px;
+    background-color: #242425;
+    color: white;
+  }
+
+  .about {
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    padding-inline: 20%;
+  }
+
+  .about h3{
+    font-family: "Shippori Antique", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 60px;
+  }
