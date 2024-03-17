@@ -37,7 +37,7 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body" >
-            <p class="successMessage"style="display: flex;flex-direction: column;"> Welcome! You have successfully logged in, </p><p>!!</p>
+            <p class="successMessage"></p>
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="continue">Continue</button>
             </div>
             
@@ -76,10 +76,10 @@
 
                 // Set session variables
                 $_SESSION['username'] = $row['username'];
-
+                $success="Welcome! You have successfully logged in, ".$uname."!";
                 echo "<script language='javascript'>
                     $(document).ready(function() {
-                    $('#success .successMessage').append('$uname');
+                    $('#success .successMessage').append('$success');
                     $('#success').modal('show');
                     });
                     </script>";

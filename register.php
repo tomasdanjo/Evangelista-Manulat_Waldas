@@ -79,6 +79,7 @@
 
 <?php
     $error = "";
+    $success="";
     if(isset($_POST['btnRegister'])){
         //error checker;
         
@@ -147,9 +148,13 @@
             //save data to tbluseraccount
             $sql ="Insert into tbluseraccount(emailadd,username,password,usertype) values('".$email."','".$uname."','".$hashed_pword."','".$acctype."')";
             mysqli_query($connection,$sql);
+            $success="Welcome! You may now login, ".$uname.". Thanks for joining Waldas.";
             echo "<script language='javascript'>
-                    alert('New record saved.');
-                </script>";
+                    $(document).ready(function() {
+                    $('#success .successMessage').append('$success');
+                    $('#success').modal('show');
+                    });
+                    </script>";
         }
 
 	}
