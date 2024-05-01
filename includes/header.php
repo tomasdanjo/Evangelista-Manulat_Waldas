@@ -11,37 +11,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Shippori+Antique&display=swap" rel="stylesheet">
-    
+
 </head>
 <?php
-    session_start();
-    include("connect.php");
-    include("login.php");
-    include("register.php");
+session_start();
+include("connect.php");
+include("login.php");
+include("register.php");
 ?>
 
 <div class="nav">
     <header>
         Waldas
     </header>
-        <a href="index.php" class="nav-link">HOME</a>
-        <a href="about.php" class="nav-link">ABOUT</a>
-        <a href="contact.php" class="nav-link">CONTACT</a>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"
-                id="profileName">
-                JOIN NOW!
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login">LOGIN</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#register">REGISTER</a></li>
-            </ul>
-        </li>
+    <a href="index.php" class="nav-link">HOME</a>
+    <a href="about.php" class="nav-link">ABOUT</a>
+    <a href="contact.php" class="nav-link">CONTACT</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="profileName">
+            JOIN NOW!
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login">LOGIN</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#register">REGISTER</a></li>
+        </ul>
+    </li>
 
 </div>
 
 <script src="js/script.js"></script>
-
-
-    
-    
