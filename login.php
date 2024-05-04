@@ -71,16 +71,21 @@ if (isset($_POST['btnLogin'])) {
     } else {
         // Phone or email exists, fetch the user's data
         $actual_password = "";
-        $user_id = getVal($connection, "user_id", "tbluser", "email", $emailOrPhone);
+        // $user_id = getVal($connection, "user_id", "tbluser", "email", $emailOrPhone);
+        $user_id;
         if ($phoneExists) {
             $actual_password =  getVal($connection, "acc_password", "tblacc", "phonenumber", $emailOrPhone);
+            $user_id = getVal($connection, "user_id", "tblacc", "phonenumber", $emailOrPhone);
         } else if ($emailExists) {
 
             $actual_password =  getVal($connection, "acc_password", "tblacc", "user_id", $user_id);
+
+            $user_id = getVal($connection, "user_id", "tbluser", "email", $emailOrPhone);
         }
 
 
-        $user_id = getVal($connection, "user_id", "tbluser", "email", $emailOrPhone);
+
+
         // Verify the password
         if (password_verify($pword, $actual_password)) {
             // Password is correct
@@ -88,7 +93,11 @@ if (isset($_POST['btnLogin'])) {
             // Set session variables
             // $_SESSION['username'] = getVal($connection, "name", "tbluser", "user_id", $user_id);
 
-            $success = "Welcome! You have successfully logged in, " .  getVal($connection, "name", "tbluser", "user_id", $user_id) . "!";
+            $name = getVal($connection, "name", "tbluser", "user_id", $user_id);
+            $_SESSION["username"] = $name;
+            $_SESSION["user_id"] =  $user_id;
+
+            $success = "Welcome! You have successfully logged in, " .  $name . "!";
             echo "<script language='javascript'>
                     $(document).ready(function() {
                     $('#success .successMessage').append('$success');

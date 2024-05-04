@@ -140,6 +140,13 @@ if (isset($_POST['btnRegister'])) {
 
         if ($user_id == -1) {
             //email already exists
+            $error = "Email already exists";
+            echo "<script language='javascript'>
+                        $(document).ready(function() {
+                        $('#user .errorMessage').prepend('$error');
+                        $('#user').modal('show');
+                    });
+                    </script>";
         } else {
             //save to tblacc
             createAcc($connection, $user_id, $phone, $hashed_pword);

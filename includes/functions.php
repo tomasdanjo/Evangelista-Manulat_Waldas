@@ -37,9 +37,11 @@ function createWallet($connection, $acc_id, $name)
 {
 
   //check if walletname already exists
-  if (valueExists($connection, "tblwallet", "name", $name)) {
-    return -1;
-  }
+
+  $sql = "Select wallet_id from tblwallet where account_id = " . $acc_id . " and name = '" . $name . "'";
+  $retval = mysqli_query($connection, $sql);
+  if (mysqli_num_rows($retval) > 0) return -1;
+
 
   $sql = "Insert into tblwallet(account_id,name) values (" . $acc_id . ",'" . $name . "')";
   mysqli_query($connection, $sql);
@@ -65,4 +67,26 @@ function getVal($connection, $desired_val, $table, $column, $value)
     // If no rows are returned, return null or handle it as appropriate for your application
     return null;
   }
+}
+
+function updateVal($connection, $setValCol, $setVal, $table, $column, $columnvalue)
+{
+  $sql = "Update " . $table . " Set " . $setValCol . " = '" . $setVal . "' Where " . $column . " = " . "'" . $columnvalue . "'";
+
+  mysqli_query($connection, $sql);
+}
+
+function updateAccTotalBalance($connection, $acc_id)
+{
+  $sql = "Select sum(balance) as balance from tblwallet where account_id = " . $acc_id;
+  $retval = mysqli_query($connection, $sql);
+
+  $total_balance = "";
+
+  if (mysqli_num_rows($retval) > 0) {
+    $row = mysqli_fetch_assoc($retval);
+    $total_balance = $row["balance"];
+  }
+
+  updateVal($connection, "total_balance", $total_balance, "tblacc", "account_id", $acc_id);
 }

@@ -18,6 +18,7 @@ session_start();
 include("connect.php");
 include("login.php");
 include("register.php");
+include_once("functions.php");
 ?>
 
 <div class="nav">
@@ -27,7 +28,18 @@ include("register.php");
     <a href="index.php" class="nav-link">HOME</a>
     <a href="about.php" class="nav-link">ABOUT</a>
     <a href="contact.php" class="nav-link">CONTACT</a>
-    <li class="nav-item dropdown">
+    <?php
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        echo '<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="profileName">
+            ' . $username . '</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item"  href="logout.php">Logout</a></li>
+        </ul>
+        </li>';
+    } else {
+        echo '<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="profileName">
             JOIN NOW!
         </a>
@@ -35,8 +47,26 @@ include("register.php");
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login">LOGIN</a></li>
             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#register">REGISTER</a></li>
         </ul>
-    </li>
+    </li>';
+    }
 
+    if (isset($_SESSION['username']) && ($_SESSION['username']) == "admin admin") {
+
+        echo '
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+            Menu
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="account.php">Account</a></li>
+            <li><a class="dropdown-item" href="user.php">User</a></li>
+            <li><a class="dropdown-item" href="wallet.php">Wallets</a></li>
+            <li><a class="dropdown-item" href="transactions.php">Transactions</a></li>
+            <li><a class="dropdown-item" href="reports.php">Reports</a></li>
+            </ul>
+        </li>';
+    }
+    ?>
 </div>
 
 <script src="js/script.js"></script>
