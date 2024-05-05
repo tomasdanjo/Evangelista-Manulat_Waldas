@@ -98,22 +98,10 @@ if (isset($_POST['btnLogin'])) {
             $_SESSION["user_id"] =  $user_id;
 
             $success = "Welcome! You have successfully logged in, " .  $name . "!";
-            echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#success .successMessage').append('$success');
-                    $('#success').modal('show');
-                    });
-                    </script>";
+            echoMessage("success", "successMessage", $success);
         } else {
             // Password is incorrect
-            $error = "Password is incorrect. ";
-            $error .= 'Do you want to try again? <a data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#login" href="#">Log In</a>';
-            echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#user .errorMessage').prepend('$error');
-                    $('#user').modal('show');
-                });
-                </script>";
+            echoMessage("user", "errorMessage", $error);
         }
     }
 }

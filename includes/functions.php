@@ -100,3 +100,26 @@ function echoMessage($modalID, $messageClass, $message)
                 });
                 </script>";
 }
+
+function walletnameExists($connection, $acc_id, $name)
+{
+  $sql = "Select wallet_id from tblwallet where name = '" . $name . "' and account_id = " . $acc_id;
+
+  $retval = mysqli_query($connection, $sql);
+  $row_count = mysqli_num_rows($retval);
+  return $row_count > 0;
+}
+
+function getMainWalletID($connection, $wallet_id)
+{
+  $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
+
+  $sql = "Select wallet_id from tblwallet where name = 'Main' and account_id=" . $acc_id;
+  $result = mysqli_query($connection, $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    return $row["wallet_id"];
+  } else {
+    return -1;
+  }
+}

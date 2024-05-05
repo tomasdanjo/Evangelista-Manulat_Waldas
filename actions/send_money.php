@@ -149,14 +149,9 @@ if (isset($_POST['btnSend'])) {
 
         // Your transaction logic here
         $success = "Transaction successful.";
-        echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#success .successMessage').append('$success');
-                    $('#success').modal('show');
-                    });
-                    </script>";
+        echoMessage("success", "successMessage", $success);
 
-        $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $sender_account['account_id'] . "','" . $receiver_account_id['account_id'] . "','" . $amount . "')";
+        $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $sender_accid . "','" . $receiver_accid . "','" . $amount . "')";
         mysqli_query($connection, $sql);
       }
     }

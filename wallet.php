@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-// include('create_wallet.php');
+include('actions/create_wallet.php');
 
 ?>
 
@@ -54,6 +54,26 @@ include("includes/header.php");
           echo '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteWallet_' . $row["wallet_id"] . '">Delete</button></td>';
         }
 
+        echo '<div class="modal fade" id="deleteWallet_' . $row["wallet_id"] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Are you sure you want to delete this user?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form method="post" id="deleteUser">
+            <input type="number" class="form-control" aria-describedby="basic-addon1" name="wallet_id" id="wallet_id" value=' . $row["wallet_id"] . ' required hidden>
+            <input class="btn btn-danger" type="submit" value="Yes" name="btnDelete">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        </form>
+              </div>
+              <div class="modal-footer">
+                <?php include("includes/footer1.php"); ?>
+              </div>
+            </div>
+          </div>
+        </div>';
 
 
         echo '<div class="modal fade" id="updateWallet_' . $row["wallet_id"] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,36 +137,71 @@ include("includes/header.php");
       echo "<tr><td colspan='5'>No data found</td></tr>";
     }
 
-    if (isset($_POST["btnUpdate"])) {
+
+    if (isset($_POST["btnDelete"])) {
       $wallet_id = $_POST["wallet_id"];
 
-      $wallet_name = isset($_POST["updateWalletName"]) ? $_POST["updateWalletName"] : "";
+      $wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $wallet_id);
+      $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
 
+      $main_wallet_id = getMainWalletID($connection, $wallet_id);
+      $main_wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $main_wallet_id);
+      $main_wallet_balance += $wallet_balance;
+
+
+
+
+
+
+      $sql = "Delete from tblwallet where wallet_id=" . $wallet_id . "";
+      if ($connection->query($sql) === TRUE) {
+        $success = "Successfully deleted wallet.";
+        echoMessage("successUpdate", "successMessage", $success);
+        updateVal($connection, "balance", $main_wallet_balance, "tblwallet", "wallet_id", $main_wallet_id);
+        updateAccTotalBalance($connection, $acc_id);
+      } else {
+        echo "Error deleting record: " . $connection->error;
+      }
+    }
+
+
+    if (isset($_POST["btnUpdate"])) {
+      $wallet_id = $_POST["wallet_id"];
+      $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
+
+
+      $wallet_name = isset($_POST["updateWalletName"]) ? $_POST["updateWalletName"] : "";
       $wallet_balance = $_POST["updateBalance"];
 
       $prev_walllet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $wallet_id);
 
       $prev_walllet_name = $wallet_name !== "" ? getVal($connection, "name", "tblwallet", "wallet_id", $wallet_id) : "";
 
-      if ($wallet_name !== "") updateVal($connection, "name", $wallet_name, "tblwallet", "wallet_id", $wallet_id);
-
-      updateVal($connection, "balance", $wallet_balance, "tblwallet", "wallet_id", $wallet_id);
-
-      $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
-      updateAccTotalBalance($connection, $acc_id);
-
-
-
-
-
-      if ($prev_walllet_balance === $wallet_balance && $prev_walllet_name === $wallet_name) {
-        $success = "Nothing is updated.";
+      if ($prev_walllet_name !== $wallet_name && walletnameExists($connection, $acc_id, $wallet_name)) {
+        $success = "Wallet name already exists";
         echoMessage('user', 'errorMessage', $success);
-      } else if (mysqli_query($connection, $sql)) {
-        $success = "Successfully updated wallet.";
-        echoMessage('successUpdate', 'successMessage', $success);
       } else {
-        echo "Error updating record: " . mysqli_error($connection);
+
+        if ($wallet_name !== "") updateVal($connection, "name", $wallet_name, "tblwallet", "wallet_id", $wallet_id);
+
+        updateVal($connection, "balance", $wallet_balance, "tblwallet", "wallet_id", $wallet_id);
+
+
+        updateAccTotalBalance($connection, $acc_id);
+
+
+
+
+
+        if ($prev_walllet_balance === $wallet_balance && $prev_walllet_name === $wallet_name) {
+          $success = "Nothing is updated.";
+          echoMessage('user', 'errorMessage', $success);
+        } else if (mysqli_query($connection, $sql)) {
+          $success = "Successfully updated wallet.";
+          echoMessage('successUpdate', 'successMessage', $success);
+        } else {
+          echo "Error updating record: " . mysqli_error($connection);
+        }
       }
     }
     // Close connection
