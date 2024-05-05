@@ -77,10 +77,8 @@ if (isset($_POST['btnLogin'])) {
             $actual_password =  getVal($connection, "acc_password", "tblacc", "phonenumber", $emailOrPhone);
             $user_id = getVal($connection, "user_id", "tblacc", "phonenumber", $emailOrPhone);
         } else if ($emailExists) {
-
-            $actual_password =  getVal($connection, "acc_password", "tblacc", "user_id", $user_id);
-
             $user_id = getVal($connection, "user_id", "tbluser", "email", $emailOrPhone);
+            $actual_password =  getVal($connection, "acc_password", "tblacc", "user_id", $user_id);
         }
 
 
@@ -101,6 +99,7 @@ if (isset($_POST['btnLogin'])) {
             echoMessage("success", "successMessage", $success);
         } else {
             // Password is incorrect
+            $error="Incorrect username/password!";
             echoMessage("user", "errorMessage", $error);
         }
     }
