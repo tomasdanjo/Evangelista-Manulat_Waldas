@@ -68,7 +68,7 @@ if (file_exists('includes/header.php')) {
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Update User Details</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Update Account Details</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -79,7 +79,7 @@ if (file_exists('includes/header.php')) {
                       <input type="number" class="form-control" aria-describedby="basic-addon1" name="accID" id="accID" value="' . $row["account_id"] . '" required hidden>
                         <div class="input-group mb-3">
                           <span class="input-group-text" id="basic-addon1">Account Type</span>
-                          <input type="text" class="form-control" placeholder="' . $row["acc_type"] . '"  aria-describedby="basic-addon1" name="updateAccType" id="updateAccType" disabled>
+                          <input type="text" class="form-control" value="' . $row["acc_type"] . '"  aria-describedby="basic-addon1" name="updateAccType" id="updateAccType" disabled>
                         </div>
 
                         <div class="input-group mb-3">
@@ -95,13 +95,13 @@ if (file_exists('includes/header.php')) {
                           <span class="input-group-text" id="basic-addon1">Link to user Portrait</span>
                           <input type="text" class="form-control" 
                           value="' . $row["user_portrait"] . '"
-                          aria-describedby="basic-addon1" name="updatedEmail" id="updatedEmail">
+                          aria-describedby="basic-addon1" name="updatePortrait" id="updatePortrait">
                         </div>
                         <div class="input-group mb-3">
                           <span class="input-group-text" id="basic-addon1">Link to Government ID</span>
                           <input type="text" class="form-control" 
                           value="' . $row["valid_government_id"] . '"
-                          aria-describedby="basic-addon1" name="updatedEmail" id="updatedEmail">
+                          aria-describedby="basic-addon1" name="updateGovID" id="updateGovID">
                         </div>
               
               
@@ -135,17 +135,37 @@ if (file_exists('includes/header.php')) {
       $sql = "Delete from tblacc where account_id=" . $accID . "";
       if ($connection->query($sql) === TRUE) {
         $success = "Successfully deleted account.";
-        echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#successUpdate .successMessage').append('$success');
-                    $('#successUpdate').modal('show');
-                    });
-                    </script>";
+        echoMessage("successUpdate", "successMessage", $success);
       } else {
         echo "Error deleting record: " . $connection->error;
       }
     }
 
+    if (isset($_POST["btnUpdate"])) {
+      // $acc_type = $_POST["updateAccType"];
+      $accID = $_POST["accID"];
+
+
+      $portrait = $_POST["updatePortrait"];
+      $govID = $_POST["updateGovID"];
+
+      $prev_portrait = getVal($connection, "user_portrait", "tblacc", "account_id", $accID);
+      $prev_govID = getVal($connection, "valid_government_id", "tblacc", "account_id", $accID);
+
+      updateVal($connection, "user_portrait", $portrait, "tblacc", "account_id", $accID);
+      updateVal($connection, "valid_government_id", $govID, "tblacc", "account_id", $accID);
+
+      if ($prev_portrait === $portrait && $prev_govID === $govID) {
+        $success = "Nothing is updated.";
+        echoMessage("user", "errorMessage", $success);
+      } else if (mysqli_query($connection, $sql)) {
+        $success = "Successfully updated user.";
+        echoMessage("successUpdate", "successMessage", $success);
+      } else {
+        echo "Error updating record: " . mysqli_error($connection);
+      }
+    }
+    mysqli_close($connection);
     ?>
   </tbody>
 </table>

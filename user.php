@@ -115,12 +115,7 @@ include("includes/header.php");
       // Execute the query
       if ($connection->query($sql) === TRUE) {
         $success = "Successfully deleted user.";
-        echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#successUpdate .successMessage').append('$success');
-                    $('#successUpdate').modal('show');
-                    });
-                    </script>";
+        echoMessage("successUpdate", "successMessage", $success);
       } else {
         echo "Error deleting record: " . $connection->error;
       }
@@ -132,31 +127,21 @@ include("includes/header.php");
       $email = $_POST['updatedEmail'];
       $date = $_POST["updatedBdate"];
 
-      $prev_name = getVal($connection, "name", "tbluser", "name", $user_id);
-      $prev_email = getVal($connection, "email", "tbluser", "name", $user_id);
-      $prev_bdate = getVal($connection, "birthdate", "tbluser", "name", $user_id);
+      $prev_name = getVal($connection, "name", "tbluser", "user_id", $user_id);
+      $prev_email = getVal($connection, "email", "tbluser", "user_id", $user_id);
+      $prev_bdate = getVal($connection, "birthdate", "tbluser", "user_id", $user_id);
 
 
       updateVal($connection, "name", $name, "tbluser", "user_id", $user_id);
       updateVal($connection, "email", $email, "tbluser", "user_id", $user_id);
       updateVal($connection, "birthdate", $date, "tbluser", "user_id", $user_id);
 
-      if ($prev_name == $name && $prev_email == $email && $date == $prev_bdate) {
+      if ($prev_name === $name && $prev_email === $email && $date === $prev_bdate) {
         $success = "Nothing is updated.";
-        echo "<script language='javascript'>
-                $(document).ready(function() {
-                $('#user .errorMessage').append('$success');
-                $('#user').modal('show');
-                });
-                </script>";
+        echoMessage('user', 'errorMessage', $success);
       } else if (mysqli_query($connection, $sql)) {
         $success = "Successfully updated user.";
-        echo "<script language='javascript'>
-                $(document).ready(function() {
-                $('#successUpdate .successMessage').append('$success');
-                $('#successUpdate').modal('show');
-                });
-                </script>";
+        echoMessage('successUpdate', 'successMessage', $success);
       } else {
         echo "Error updating record: " . mysqli_error($connection);
       }

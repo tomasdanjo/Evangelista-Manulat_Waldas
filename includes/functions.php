@@ -90,3 +90,13 @@ function updateAccTotalBalance($connection, $acc_id)
 
   updateVal($connection, "total_balance", $total_balance, "tblacc", "account_id", $acc_id);
 }
+
+function echoMessage($modalID, $messageClass, $message)
+{
+  echo "<script language='javascript'>
+                $(document).ready(function() {
+                $('#$modalID .$messageClass').append('$message');
+                $('#$modalID').modal('show');
+                });
+                </script>";
+}
