@@ -4,7 +4,7 @@ include("includes/header.php");
 
 ?>
 
-<h2>Report 1</h2>
+<h2 class="hcenter">Report 1</h2>
 <table class="table table-dark table-hover">
   <thead>
     <tr>
@@ -21,7 +21,7 @@ include("includes/header.php");
       die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Query to select all data from example_table
+    // Query to select amount from table transaction
     $sql = "SELECT COUNT(amount) as totalNumber FROM tbltransaction where amount>=1000";
     $result = mysqli_query($connection, $sql);
 
@@ -34,7 +34,7 @@ include("includes/header.php");
   </tbody>
 </table>
 <!-- username and phone number -->
-<h2>Report 2</h2>
+<h2 class="hcenter">Report 2</h2>
 <table class="table table-dark table-hover">
   <thead>
     <tr>
@@ -55,7 +55,7 @@ include("includes/header.php");
         $user_id = $row["user_id"];
         $name = getVal($connection, "name", "tbluser", "user_id", $user_id);
         $phone = getVal($connection, "phonenumber", "tblacc", "user_id", $user_id);
-
+        $str .= "<tr>";
         $str .= "<td>" . $name . "</td>";
         $str .= "<td>" . $phone . "</td>";
         $str .= "</tr>";
@@ -68,7 +68,7 @@ include("includes/header.php");
 
 <!-- //number of wallets per user -->
 
-<h2>Report 3</h2>
+<h2 class="hcenter">Report 3</h2>
 
 <table class="table table-dark table-hover">
   <thead>

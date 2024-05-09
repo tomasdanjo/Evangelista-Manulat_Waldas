@@ -202,3 +202,17 @@ body {
     font-style: normal;
     font-size: 60px;
   }
+
+  .table {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hcenter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
