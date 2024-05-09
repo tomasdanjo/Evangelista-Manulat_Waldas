@@ -21,25 +21,30 @@ include("includes/header.php");
       die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT 
-                COUNT(CASE WHEN acc_type = 'basic' THEN 1 ELSE 0 END) AS basicAccs,
-                COUNT(CASE WHEN acc_type = 'partial' THEN 1 ELSE 0 END) AS partialAccs
-            FROM tblacc";
+    $sql = "SELECT COUNT(account_id) as basicAccs FROM tblacc where acc_type = 'basic'";
     $result = mysqli_query($connection, $sql);
 
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["basicAccs"] . "</td>";
+    }
+
+    $sql = "SELECT COUNT(account_id) as partialAccs FROM tblacc where acc_type = 'partial'";
+    $result = mysqli_query($connection, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["partialAccs"] . "</td>";
     }
 
-    // $sql = "SELECT COUNT(account_id) as partialAccs FROM tblacc where acc_type = 'partial'";
-    // $result = mysqli_query($connection, $sql);
+    $sql = "SELECT COUNT(account_id) as fullAccs FROM tblacc where acc_type = 'full'";
+    $result = mysqli_query($connection, $sql);
 
-    // if (mysqli_num_rows($result) > 0) {
-    //   $row = mysqli_fetch_assoc($result);
-    //   echo "<td>" . $row["partialAccs"] . "</td>";
-    // }
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      echo "<td>" . $row["fullAccs"] . "</td>";
+    }
+
     ?>
   </tbody>
 </table>
