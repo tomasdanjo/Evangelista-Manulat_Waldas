@@ -123,3 +123,15 @@ function getMainWalletID($connection, $wallet_id)
     return -1;
   }
 }
+
+function getNumberOfWallet($connection, $acc_id)
+{
+  $sql = "Select count(account_id) as numOfWallets from tblwallet where account_id=" . $acc_id;
+  $result = mysqli_query($connection, $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    return $row["numOfWallets"];
+  } else {
+    return -1;
+  }
+}

@@ -60,6 +60,26 @@ if (isset($_POST['btnCreate'])) {
     $user_id = $_SESSION["user_id"];
     $acc_id = getVal($connection, "account_id", "tblacc", "user_id", $user_id);
 
+    //get user acc type
+    $user_acc_type = getVal($connection, "acc_type", "tblacc", "account_id", $acc_id);
+
+    $daily_deposit_limit = getVal($connection, "daily_deposit_limit", "tblaccounttypes", "acctypeid", $user_acc_type);
+
+    $max_balance = getVal($connection, "max_balance", "tblaccounttypes", "acctypeid", $user_acc_type);
+
+    $max_wallet_count = getVal($connection, "max_wallet_count", "tblaccounttypes", "acctypeid", $user_acc_type);
+
+
+    //count number of wallets a user has given account id
+    $user_number_of_wallets =  getNumberOfWallet($connection, $acc_id);
+
+    if ($user_number_of_wallets >= $max_wallet_count) {
+      $error = "Maximum number of wallet is reached. Verify your account to add more or remove existing ones";
+
+      echoMessage("user", "errorMessage", $error);
+      return;
+    }
+
 
 
     // Check if wallet already exists 
