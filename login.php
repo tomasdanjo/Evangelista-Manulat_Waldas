@@ -62,12 +62,7 @@ if (isset($_POST['btnLogin'])) {
         // Username does not exist
         $error = "Email or Phone not found. ";
         $error .= 'Do you want to register instead? <a data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#register" href="#">Register</a>';
-        echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#user .errorMessage').prepend('$error');
-                    $('#user').modal('show');
-                });
-                </script>";
+        echoMessage("user", "errorMessage", $error);
     } else {
         // Phone or email exists, fetch the user's data
         $actual_password = "";
@@ -99,7 +94,7 @@ if (isset($_POST['btnLogin'])) {
             echoMessage("success", "successMessage", $success);
         } else {
             // Password is incorrect
-            $error="Incorrect username/password!";
+            $error = "Incorrect username/password!";
             echoMessage("user", "errorMessage", $error);
         }
     }

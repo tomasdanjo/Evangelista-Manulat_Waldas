@@ -97,62 +97,77 @@ if (isset($_POST['btnSend'])) {
       } else {
         // Sufficient balance, proceed with the transaction
 
-        // Update sender's balance
-        //get sender's main wallet balance
-        $sender_accid = getVal($connection, "account_id", "tblacc", "user_id", $sender_userid);
-        $sql = "Select balance, wallet_id from tblwallet where name = 'Main' and account_id = " . $sender_accid;
-        $retval = mysqli_query($connection, $sql);
-        $sender_main_balance;
-        $sender_main_wallet_id;
-        if (mysqli_num_rows($retval) > 0) {
-          $row = mysqli_fetch_assoc($retval);
-          $sender_main_balance = $row["balance"];
-          $sender_main_wallet_id = $row["wallet_id"];
-        }
+        //check if max balance of receiver will exceed if sent
 
-        $new_sender_main_balance = $sender_main_balance - $amount;
-
-        //update sender's main wallet
-        updateVal($connection, "balance", $new_sender_main_balance, "tblwallet", "wallet_id", $sender_main_wallet_id);
-
-        //update account's total balance
-        updateAccTotalBalance($connection, $sender_accid);
-
-
-
-
-
-        //update receiver balance;
         //get current receiver balance
         $receiver_accid = getVal($connection, "account_id", "tblacc", "phonenumber", $receiver_mobileNum);
 
-        $sql = "Select balance, wallet_id from tblwallet where name = 'Main' and account_id = " . $receiver_accid;
-        $receiver_main_balance;
-        $receiver_main_wallet_id;
-        $retval = mysqli_query($connection, $sql);
-        if (mysqli_num_rows($retval) > 0) {
-          $row = mysqli_fetch_assoc($retval);
-          $receiver_main_balance = $row["balance"];
-          $receiver_main_wallet_id = $row["wallet_id"];
+        $receiver_total_balance = getAccBalance($connection, $receiver_accid);
+
+        if ($receiver_total_balance + $amount > getAccMaxBalance($connection, $receiver_accid)) {
+          $error = "TRANSACTION UNSUCCESSFUL! Receiver exceeds maximum balance of their account type.";
+          echoMessage("user", "errorMessage", $error);
+        } else {
+
+
+
+
+          // Update sender's balance
+          //get sender's main wallet balance
+          $sender_accid = getVal($connection, "account_id", "tblacc", "user_id", $sender_userid);
+          $sql = "Select balance, wallet_id from tblwallet where name = 'Main' and account_id = " . $sender_accid;
+          $retval = mysqli_query($connection, $sql);
+          $sender_main_balance;
+          $sender_main_wallet_id;
+          if (mysqli_num_rows($retval) > 0) {
+            $row = mysqli_fetch_assoc($retval);
+            $sender_main_balance = $row["balance"];
+            $sender_main_wallet_id = $row["wallet_id"];
+          }
+
+          $new_sender_main_balance = $sender_main_balance - $amount;
+
+          //update sender's main wallet
+          updateVal($connection, "balance", $new_sender_main_balance, "tblwallet", "wallet_id", $sender_main_wallet_id);
+
+          //update account's total balance
+          updateAccTotalBalance($connection, $sender_accid);
+
+
+
+
+
+          //update receiver balance;
+
+
+          $sql = "Select balance, wallet_id from tblwallet where name = 'Main' and account_id = " . $receiver_accid;
+          $receiver_main_balance;
+          $receiver_main_wallet_id;
+          $retval = mysqli_query($connection, $sql);
+          if (mysqli_num_rows($retval) > 0) {
+            $row = mysqli_fetch_assoc($retval);
+            $receiver_main_balance = $row["balance"];
+            $receiver_main_wallet_id = $row["wallet_id"];
+          }
+
+
+          $new_receiver_main_balance = $receiver_main_balance + $amount;
+
+          //update receiver's main wallet
+          updateVal($connection, "balance", $new_receiver_main_balance, "tblwallet", "wallet_id", $receiver_main_wallet_id);
+
+
+          updateAccTotalBalance($connection, $receiver_accid);
+
+
+
+          // Your transaction logic here
+          $success = "Transaction successful.";
+          echoMessage("success", "successMessage", $success);
+
+          $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $sender_accid . "','" . $receiver_accid . "','" . $amount . "')";
+          mysqli_query($connection, $sql);
         }
-
-
-        $new_receiver_main_balance = $receiver_main_balance + $amount;
-
-        //update receiver's main wallet
-        updateVal($connection, "balance", $new_receiver_main_balance, "tblwallet", "wallet_id", $receiver_main_wallet_id);
-
-
-        updateAccTotalBalance($connection, $receiver_accid);
-
-
-
-        // Your transaction logic here
-        $success = "Transaction successful.";
-        echoMessage("success", "successMessage", $success);
-
-        $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $sender_accid . "','" . $receiver_accid . "','" . $amount . "')";
-        mysqli_query($connection, $sql);
       }
     }
   }

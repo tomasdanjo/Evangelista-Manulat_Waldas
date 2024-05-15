@@ -50,7 +50,7 @@ include("register.php");
     }
 
 
-    if (isset($_SESSION['username']) && ($_SESSION['username']) == "admin") {
+    if (isset($_SESSION['username']) && ($_SESSION['username']) == "admin admin") {
 
         echo '
                     <li class="nav-item dropdown">

@@ -2,6 +2,7 @@
 
 include("connect.php");
 
+
 function valueExists($connection, $table, $column, $value)
 {
   $sql = "Select * from " . $table . " where " . $column . "='" . $value . "'";
@@ -134,4 +135,33 @@ function getNumberOfWallet($connection, $acc_id)
   } else {
     return -1;
   }
+}
+
+function getAccType($connection, $acc_id)
+{
+  $acc_type = getVal($connection, "acc_type", "tblacc", "account_id", $acc_id);
+  return $acc_type;
+}
+
+function getAccMaxBalance($connection, $acc_id)
+{
+  $acc_type = getAccType($connection, $acc_id);
+  $max_balance = getVal($connection, "max_balance", "tblaccounttypes", "acctypeid", $acc_type);
+  return $max_balance;
+}
+
+function getAccBalance($connection, $acc_id)
+{
+  $total_balance = getVal($connection, "total_balance", "tblacc", "account_id", $acc_id);
+  return $total_balance;
+}
+
+function upgradeAccToPartial($connection, $acc_id)
+{
+  updateVal($connection, "acc_type", "Partial", "tblacc", "account_id", $acc_id);
+}
+
+function upgradeAccToFull($connection, $acc_id)
+{
+  updateVal($connection, "acc_type", "Full", "tblacc", "account_id", $acc_id);
 }
