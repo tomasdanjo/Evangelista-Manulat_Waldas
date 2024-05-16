@@ -63,6 +63,7 @@ include("register.php");
                         <li><a class="dropdown-item" href="wallet.php">Wallets</a></li>
                         <li><a class="dropdown-item" href="transactions.php">Transactions</a></li>
                         <li><a class="dropdown-item" href="reports.php">Reports</a></li>
+                        <li><a class="dropdown-item" href="stats.php">Statistics</a></li>
                         </ul>
                     </li>';
     }

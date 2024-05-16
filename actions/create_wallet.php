@@ -83,7 +83,7 @@ if (isset($_POST['btnCreate'])) {
 
 
     // Check if wallet already exists 
-    $walletExists = valueExists($connection, 'tblwallet', 'name', $wallet_name, 'account_id', $acc_id);
+    $walletExists = valueExists($connection, 'tblwallet', 'name', $wallet_name);
 
     if ($walletExists) {
       $error = "Cannot have the same wallet name " . $wallet_name . " in the same account hihi ";

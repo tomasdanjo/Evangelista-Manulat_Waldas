@@ -50,7 +50,20 @@ function createWallet($connection, $acc_id, $name)
   return getVal($connection, "wallet_id", "tblwallet", "account_id", $acc_id);
 }
 
-
+function getAll($connection, $table, $column, $value)
+{
+  $sql = "Select * from " . $table . " where " . $column . " = '" . $value . "'";
+  $retval = mysqli_query($connection, $sql);
+  if (!$retval) {
+    die('Error: ' . mysqli_error($connection));
+  }
+  if (mysqli_num_rows($retval) > 0) {
+    return $retval;
+  } else {
+  
+    return null;
+  }
+}
 
 function getVal($connection, $desired_val, $table, $column, $value)
 {

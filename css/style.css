@@ -1,218 +1,373 @@
 *{
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 body {
-    background-color: 		#fedc32;
-    
-    display: flex;
-    flex-direction: column;
-  }
+  background-color: 		#fedc32;
+  
+  display: flex;
+  flex-direction: column;
+}
 
 .nav header {
-    margin-right: auto;
-    font-family: "Monoton", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 60px;
-  padding-left: 5%;
+  margin-right: auto;
+  font-family: "Monoton", sans-serif;
+font-weight: 500;
+font-style: normal;
+font-size: 60px;
+padding-left: 5%;
 }
 
 .nav {
-    
-    overflow: visible;
-    display: flex;
-    margin-top: 20px;
-    padding-right: 2%;
-    align-items: center;
-    justify-content: space-between;
-  }
   
-  /* Style the links inside the navigation bar */
-  .nav a {
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    float: left;
-    color: rgb(39, 39, 39);
-    text-align: center;
-    padding: 14px 16px;
-    margin-left: 0.5%;
-    letter-spacing: 2px;
-    text-decoration: none;
-    font-size: 20px;
-    text-decoration-skip-ink: auto;
-    text-underline-offset: 10px;
-  }
-  
-  /* Change the color of links on hover */
-  .nav a:hover {
-    background-color: #000000;
-    color: white;
-  }
-  
-  /* Add a color to the active/current link */
-  .nav a.active {
-    color: #242425;
-    text-decoration: underline;
-    text-decoration-thickness: 5px;
-  }
+  overflow: visible;
+  display: flex;
+  margin-top: 20px;
+  padding-right: 2%;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .centercard {
-    
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-top: 6%;
-  }
-
-  .waldasCard {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
-    transition: 0.3s;
-    border-radius: 30px;
-    width: 400px;
-    height: 250px;
-    justify-content: center;
-    align-items: center;
-    background-color: #272829;
-    color: white;
-    margin-top: 40px;
-    margin-right: 200px;
-  }
-
-  
-  /* On mouse-over, add a deeper shadow */
-  .waldasCard:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,1);
-  }
-  
-  /* Add some padding inside the card container */
-  .container {
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .container h3 {
-    font-family: "Monoton", sans-serif;
-  font-weight: 300;
+/* Style the links inside the navigation bar */
+.nav a {
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 900;
   font-style: normal;
-  font-size: 30px;
-  }
+  float: left;
+  color: rgb(39, 39, 39);
+  text-align: center;
+  padding: 14px 16px;
+  margin-left: 0.5%;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-size: 20px;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 10px;
+}
 
-  .acctNum {
-    display: flex;
-    color: gray;
-    justify-content: center;
-  }
+/* Change the color of links on hover */
+.nav a:hover {
+  background-color: #000000;
+  color: white;
+}
 
-  .desc {
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: left;
-    padding: 5%;
-  }
+/* Add a color to the active/current link */
+.nav a.active {
+  color: #242425;
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+}
 
-  .desc h2{
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 60px;
-  }
+.centercard {
+  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 6%;
+}
 
-  .desc {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: left;
-    padding: 5%;
-  }
+.waldasCard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
+  transition: 0.3s;
+  border-radius: 30px;
+  width: 400px;
+  height: 250px;
+  justify-content: center;
+  align-items: center;
+  background-color: #272829;
+  color: white;
+  margin-top: 30px;
+  margin-right: 30px;
+}
 
-  .center {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10%;
-  }
 
-  .footer {
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+/* On mouse-over, add a deeper shadow */
+.waldasCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,1);
+}
 
-  .modal-footer {
-    display:contents;
-  }
+/* Add some padding inside the card container */
+.container {
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .contactcard {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2%;
-    padding-left: 20%;
-    padding-right: 20%;
-  }
+.container h3 {
+  font-family: "Monoton", sans-serif;
+font-weight: 300;
+font-style: normal;
+font-size: 30px;
+}
 
-  .card {
-    width: 400px;
-    background-color: #242425;
-    color: white;
-  }
+.acctNum {
+  display: flex;
+  color: gray;
+  justify-content: center;
+}
 
-  .about {
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: center;
-    padding-inline: 20%;
-  }
+.desc {
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 5%;
+}
 
-  .about h3{
-    font-family: "Shippori Antique", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 60px;
-  }
+.desc h2{
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 60px;
+}
 
-  .table {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.desc {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 5%;
+}
 
-  .hcenter {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
+
+.footer {
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer {
+  display:contents;
+}
+
+.contactcard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.card {
+  width: 400px;
+  background-color: #242425;
+  color: white;
+}
+
+.about {
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  padding-inline: 20%;
+}
+
+.about h3{
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 60px;
+}
+
+.table {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hcenter {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnSend {
+  padding: 1.1em 2em;
+  background: none;
+  border: 2px solid #fff;
+  font-size: 15px;
+  color: #131313;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 12px;
+  background-color: #4cc9f0;
+  font-weight: bolder;
+  box-shadow: 0 2px 0 2px #000;
+ }
+ 
+ .btnSend:before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 120%;
+  background-color: #ff6700;
+  top: 50%;
+  transform: skewX(30deg) translate(-150%, -50%);
+  transition: all 0.5s;
+ }
+ 
+ .btnSend:hover {
+  background-color: #3caa58;
+  color: #fff;
+  box-shadow: 0 2px 0 2px #0a521a;
+ }
+ 
+ .btnSend:hover::before {
+  transform: skewX(30deg) translate(180%, -50%);
+  transition-delay: 0.1s;
+ }
+ 
+ .btnSend:active {
+  transform: scale(0.9);
+ }
+
+ .btnCreate {
+  font-size: 20px;
+  background: rgba(0, 0, 0, 0.137);
+  font-family: "Shippori Antique", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  border: none;
+  padding: 1em 1.5em;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: #000000;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.btnCreate::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #000000;
+  transition: 0.5s ease;
+}
+
+.btnCreate:hover {
+  color: #ffffff;
+  transition-delay: 0.5s;
+}
+
+.btnCreate:hover::before {
+  width: 100%;
+}
+
+.btnCreate::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #000000;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.btnCreate:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: aliceblue;
+}
+
+ 
+
+ .scrolling-wrapper {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 480px;
+  max-height: 430px;
+  min-height: 430px;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  padding: 30px;
+  position: relative;
+  transition: 0.5s; 
+}
+
+.scrolling-wrapper:hover {
+  max-width: 490px;
+  overflow-y: scroll;
+}
+
+
+
+.cardsContainer {
+  max-width: 490px;
+  min-width: 490px;
+  max-height: 430px;
+  min-height: 430px;
+  white-space: nowrap;
+  
+  position: relative;
+}
+
+.cardsContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 20px;
+  height: 50px; /* Adjust the height of the fading effect */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fedc32);
+  pointer-events: none; /* Ensure the gradient doesn't interfere with interactions */
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  height: 12px;
+}
+
+.scrolling-wrapper::-webkit-scrollbar-thumb,
+.scrolling-wrapper::-webkit-scrollbar-track {
+  border-radius: 92px;
+  background: #0000005b;
+}
+
+.scrolling-wrapper::-webkit-scrollbar-thumb {
+  background: #00000081;
+}
