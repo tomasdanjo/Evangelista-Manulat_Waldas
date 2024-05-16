@@ -32,7 +32,7 @@ include("actions/send_money.php");
                                 <div class="waldasCard">
                                     <div class="container">';
                                     if($res["name"]!="Main"){
-                                        echo '<button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet'.$res["wallet_id"].'">X</button>';
+                                        echo '<button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet_'.$res["wallet_id"].'">X</button>';
                                     }
                                         echo '<h3><b style="margin-left: 10px">W</b></h3>
                                         <p><b>'.$res["name"].'</b></p>
@@ -45,6 +45,27 @@ include("actions/send_money.php");
                                 echo '</h2>
                                 </div>
                                 <div class="space"></div>
+                            </div>
+                            <!--Delete-->
+                            <div class="modal fade" id="deleteWallet_' . $res["wallet_id"] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Are you sure you want to delete this wallet?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form method="post" id="deleteUser">
+                                    <input type="number" class="form-control" aria-describedby="basic-addon1" name="wallet_id" id="wallet_id" value=' . $res["wallet_id"] . ' required hidden>
+                                    <input class="btn btn-danger" type="submit" value="Yes" name="btnDelete">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <?php include("includes/footer1.php"); ?>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal fade" id="sendMoney'.$res["wallet_id"].'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -185,6 +206,37 @@ include("actions/send_money.php");
 
 
 <?php
+if (isset($_POST["btnDelete"])) {
+    $wallet_id = $_POST["wallet_id"];
 
+    // $wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $wallet_id);
+    $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
+
+    $main_wallet_id = getMainWalletID($connection, $wallet_id);
+    $main_wallet_balance = getWalletBalance($connection,$main_wallet_id);
+    $main_wallet_balance += deleteWallet($connection,$wallet_id);
+
+    updateVal($connection, "balance", $main_wallet_balance, "tblwallet", "wallet_id", $main_wallet_id);
+    updateAccTotalBalance($connection, $acc_id);
+  }
 include("includes/footer1.php");
 ?>
+
+<div class="modal fade" id="successUpdate" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Success!</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <p class="successMessage"></p>
+        <form method="post" id="close">
+          <input type="submit" class="btn btn-primary" value="Close" name="btnClose">
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
