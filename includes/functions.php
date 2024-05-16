@@ -188,7 +188,25 @@ function getWalletName($connection, $wallet_id){
   return getVal($connection, "name","tblwallet","wallet_id",$wallet_id);
 }
 
+function getWalletBalance($connection,$wallet_id){
+  return getVal($connection, "balance","tblwallet","wallet_id",$wallet_id);
+}
+
 function getUserName($connection,$acc_id){
   $user_id = getVal($connection,"user_id","tblacc","account_id",$acc_id);
   return getVal($connection,"name","tbluser","user_id",$user_id);
 }
+
+function deleteWallet($connection,$wallet_id){
+  $wallet_balance = getVal($connection,"balance","tblwallet","wallet_id",$wallet_id);
+  $sql = "Delete from tblwallet where wallet_id=" . $wallet_id . "";
+  
+  if ($connection->query($sql) === TRUE) {
+    $success = "Successfully deleted wallet.";
+    echoMessage("successUpdate", "successMessage", $success);
+  }else{
+    echo "Error deleting record: " . $connection->error;
+  }
+  return $wallet_balance;
+}
+

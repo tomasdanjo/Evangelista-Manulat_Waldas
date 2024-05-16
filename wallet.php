@@ -141,27 +141,15 @@ include('actions/create_wallet.php');
     if (isset($_POST["btnDelete"])) {
       $wallet_id = $_POST["wallet_id"];
 
-      $wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $wallet_id);
+      // $wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $wallet_id);
       $acc_id = getVal($connection, "account_id", "tblwallet", "wallet_id", $wallet_id);
 
       $main_wallet_id = getMainWalletID($connection, $wallet_id);
-      $main_wallet_balance = getVal($connection, "balance", "tblwallet", "wallet_id", $main_wallet_id);
-      $main_wallet_balance += $wallet_balance;
+      $main_wallet_balance = getWalletBalance($connection,$main_wallet_id);
+      $main_wallet_balance += deleteWallet($connection,$wallet_id);
 
-
-
-
-
-
-      $sql = "Delete from tblwallet where wallet_id=" . $wallet_id . "";
-      if ($connection->query($sql) === TRUE) {
-        $success = "Successfully deleted wallet.";
-        echoMessage("successUpdate", "successMessage", $success);
-        updateVal($connection, "balance", $main_wallet_balance, "tblwallet", "wallet_id", $main_wallet_id);
-        updateAccTotalBalance($connection, $acc_id);
-      } else {
-        echo "Error deleting record: " . $connection->error;
-      }
+      updateVal($connection, "balance", $main_wallet_balance, "tblwallet", "wallet_id", $main_wallet_id);
+      updateAccTotalBalance($connection, $acc_id);
     }
 
 

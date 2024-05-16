@@ -62,12 +62,8 @@ if (isset($_POST['btnSend'])) {
       if ($sender_balance < $amount) {
         // Insufficient balance
         $error = "Insufficient balance. ";
-        echo "<script language='javascript'>
-                $(document).ready(function() {
-                $('#user .errorMessage').prepend('$error');
-                $('#user').modal('show');
-            });
-            </script>";
+
+            echoMessage("user","errorMessage", $error);
       } else {
         // Sufficient balance, proceed with the transaction
 
