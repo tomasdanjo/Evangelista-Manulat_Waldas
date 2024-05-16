@@ -217,45 +217,51 @@ font-size: 30px;
   align-items: center;
 }
 
-.btnSend {
+.btnTransfer {
   padding: 1.1em 2em;
   background: none;
   border: 2px solid #fff;
   font-size: 15px;
-  color: #131313;
+  color: #e7e7e7;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all 0.3s;
   border-radius: 12px;
-  background-color: #4cc9f0;
+  background-color: #111111;
   font-weight: bolder;
   box-shadow: 0 2px 0 2px #000;
  }
  
- .btnSend:before {
+ .btnTransfer:before {
   content: "";
   position: absolute;
   width: 100px;
   height: 120%;
-  background-color: #ff6700;
+  background-color: #ffffff;
   top: 50%;
   transform: skewX(30deg) translate(-150%, -50%);
   transition: all 0.5s;
  }
  
- .btnSend:hover {
-  background-color: #3caa58;
-  color: #fff;
-  box-shadow: 0 2px 0 2px #0a521a;
+ #send:hover {
+  background-color: #32acfe;
+  color: #000000;
+  box-shadow: 0 2px 0 2px #185680;
+ }
+
+ .btnTransfer:hover {
+  background-color: #fedc32;
+  color: #000000;
+  box-shadow: 0 2px 0 2px #856f00;
  }
  
- .btnSend:hover::before {
+ .btnTransfer:hover::before {
   transform: skewX(30deg) translate(180%, -50%);
   transition-delay: 0.1s;
  }
  
- .btnSend:active {
+ .btnTransfer:active {
   transform: scale(0.9);
  }
 
