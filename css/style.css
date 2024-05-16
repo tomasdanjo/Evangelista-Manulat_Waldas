@@ -99,6 +99,7 @@ padding-left: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .container h3 {
@@ -379,10 +380,10 @@ font-size: 30px;
 }
 
 .btnDelete {
-  padding: 1em 1.5em;
+  padding: 0.6em 1em;
   background: none;
   border: 2px solid #fff;
-  font-size: 15px;
+  font-size: 12px;
   color: #e7e7e7;
   cursor: pointer;
   position: relative;
@@ -392,7 +393,7 @@ font-size: 30px;
   background-color: #111111;
   font-weight: bolder;
   box-shadow: 0 2px 0 2px #000;
-  position:absolute; top:0; right:0;
+  position:absolute; top:-15px; right:-12px;
  }
  
  .btnDelete:before {

@@ -30,14 +30,16 @@ include("actions/send_money.php");
                     while ($res = mysqli_fetch_assoc($row)) {
                         echo'
                                 <div class="waldasCard">
-                                    <div class="container">
-                                        <button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet'.$res["wallet_id"].'">X</button>
-                                        <h3><b style="margin-left: 10px">W</b></h3>
-                                        <p>PHP<b>'.$res["balance"].'</b></p>
+                                    <div class="container">';
+                                    if($res["name"]!="Main"){
+                                        echo '<button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet'.$res["wallet_id"].'">X</button>';
+                                    }
+                                        echo '<h3><b style="margin-left: 10px">W</b></h3>
+                                        <p><b>'.$res["name"].'</b></p>
                                     </div>
                                     <div class="acctNum">
                                         <h2>';
-                                echo '<div class="acctNum">'.$res["name"].'</div>';
+                                echo '<div class="acctNum">PHP '.$res["balance"].'</div>';
                                 echo '</br><button class="btnTransfer" data-bs-toggle="modal" data-bs-target="#transferMoney'.$res["wallet_id"].'">Transfer Funds</button>';
                                 echo '<span style="margin-left:10px"><button class="btnTransfer" id="send" data-bs-toggle="modal" data-bs-target="#sendMoney'.$res["wallet_id"].'">Send Money</button></span>';
                                 echo '</h2>
