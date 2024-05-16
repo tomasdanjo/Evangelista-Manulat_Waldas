@@ -87,11 +87,14 @@ if (isset($_POST['btnLogin'])) {
             // $_SESSION['username'] = getVal($connection, "name", "tbluser", "user_id", $user_id);
 
             $name = getVal($connection, "name", "tbluser", "user_id", $user_id);
+            $useraccid = getVal($connection,"account_id","tblacc","user_id",$user_id);
             $_SESSION["username"] = $name;
             $_SESSION["user_id"] =  $user_id;
+           
 
             $success = "Welcome! You have successfully logged in, " .  $name . "!";
-            echoMessage("success", "successMessage", $success);
+            // echoMessage("success", "successMessage", $success);
+            pushNotification($connection,$useraccid,$success);
         } else {
             // Password is incorrect
             $error = "Incorrect username/password!";

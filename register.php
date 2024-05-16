@@ -128,12 +128,7 @@ if (isset($_POST['btnRegister'])) {
 
     if ($error) {
         $error .= 'Do you want to login instead? <a data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#login" href="#">Log In</a>';
-        echo "<script language='javascript'>
-            $(document).ready(function() {
-                $('#user .errorMessage').prepend('$error');
-                $('#user').modal('show');
-            });
-          </script>";
+          echoMessage("user","errorMessage", $error);
     } else {
         //save data to tbluser			
         $user_id = createUser($connection, $email, $name, $bday);
@@ -141,25 +136,15 @@ if (isset($_POST['btnRegister'])) {
         if ($user_id == -1) {
             //email already exists
             $error = "Email already exists";
-            echo "<script language='javascript'>
-                        $(document).ready(function() {
-                        $('#user .errorMessage').prepend('$error');
-                        $('#user').modal('show');
-                    });
-                    </script>";
+
+                    echoMessage("user","errorMessage", $error);
         } else {
             //save to tblacc
             createAcc($connection, $user_id, $phone, $hashed_pword);
         }
 
         $success = "Welcome! You may now login, " . $name . ". Thanks for joining Waldas.";
-
-        echo "<script language='javascript'>
-                    $(document).ready(function() {
-                    $('#success .successMessage').append('$success');
-                    $('#success').modal('show');
-                    });
-                    </script>";
+                    echoMessage("success","successMessage", $success);
     }
 }
 

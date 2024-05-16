@@ -178,3 +178,17 @@ function upgradeAccToFull($connection, $acc_id)
 {
   updateVal($connection, "acc_type", "Full", "tblacc", "account_id", $acc_id);
 }
+
+function pushNotification($connection, $to_acc_id, $message){
+  $sql = "Insert into tblnotifs(account_id, message) values ('".$to_acc_id."','".$message."')";
+  return mysqli_query($connection, $sql);
+}
+
+function getWalletName($connection, $wallet_id){
+  return getVal($connection, "name","tblwallet","wallet_id",$wallet_id);
+}
+
+function getUserName($connection,$acc_id){
+  $user_id = getVal($connection,"user_id","tblacc","account_id",$acc_id);
+  return getVal($connection,"name","tbluser","user_id",$user_id);
+}
