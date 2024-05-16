@@ -377,3 +377,47 @@ font-size: 30px;
 .scrolling-wrapper::-webkit-scrollbar-thumb {
   background: #00000081;
 }
+
+.btnDelete {
+  padding: 1em 1.5em;
+  background: none;
+  border: 2px solid #fff;
+  font-size: 15px;
+  color: #e7e7e7;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 100px;
+  background-color: #111111;
+  font-weight: bolder;
+  box-shadow: 0 2px 0 2px #000;
+  position:absolute; top:0; right:0;
+ }
+ 
+ .btnDelete:before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 120%;
+  background-color: #ffffff;
+  top: 50%;
+  transform: skewX(30deg) translate(-150%, -50%);
+  transition: all 0.5s;
+ }
+ 
+
+ .btnDelete:hover {
+  background-color: #fe3232;
+  color: #000000;
+  box-shadow: 0 2px 0 2px #850000;
+ }
+ 
+ .btnDelete:hover::before {
+  transform: skewX(30deg) translate(180%, -50%);
+  transition-delay: 0.1s;
+ }
+ 
+ .btnDelete:active {
+  transform: scale(0.9);
+ }

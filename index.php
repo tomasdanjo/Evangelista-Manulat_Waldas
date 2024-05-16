@@ -31,6 +31,7 @@ include("actions/send_money.php");
                         echo'
                                 <div class="waldasCard">
                                     <div class="container">
+                                        <button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet'.$res["wallet_id"].'">X</button>
                                         <h3><b style="margin-left: 10px">W</b></h3>
                                         <p>PHP<b>'.$res["balance"].'</b></p>
                                     </div>
