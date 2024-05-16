@@ -74,7 +74,13 @@ if (isset($_POST['btnCreate'])) {
     $user_number_of_wallets =  getNumberOfWallet($connection, $acc_id);
 
     if ($user_number_of_wallets >= $max_wallet_count) {
-      $error = "Maximum number of wallet is reached. Verify your account to add more or remove existing ones";
+      $error = "Maximum number of wallet is reached. ";
+      $acc_type = getAccType($connection,$acc_id);
+      if($acc_type!="Full"){
+        $error.="Verify your account to add more or remove existing ones.";
+      }else{
+        $error.="Remove existing ones.";
+      }
 
       echoMessage("user", "errorMessage", $error);
       return;
@@ -97,7 +103,8 @@ if (isset($_POST['btnCreate'])) {
       $success = "Wallet named " . $wallet_name . " was created successfully";
       $error = "";
 
-      echoMessage("success", "successMessage", $success);
+      // echoMessage("success", "successMessage", $success);
+      pushNotification($connection,$acc_id,$success);
     }
   } else {
     $error = "You need to log in first!";
