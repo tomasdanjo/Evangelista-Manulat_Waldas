@@ -124,12 +124,20 @@ if (isset($_POST['btnSend'])) {
 
 
           updateAccTotalBalance($connection, $receiver_accid);
+          $receiver_name = getUserName($connection, $receiver_accid);
+          $sender_name = getUserName($connection,$sender_accid);
+
 
 
 
           // Your transaction logic here
-          $success = "Transaction successful.";
-          echoMessage("success", "successMessage", $success);
+          $success = "Successfully sent ".$amount." to ". $receiver_name.".";
+          $receiver_notif = "You have received ".$amount." from ".$sender_name;
+
+          // echoMessage("success", "successMessage", $success);
+          pushNotification($connection,$sender_accid,$success);
+          pushNotification($connection,$receiver_accid,$receiver_notif);
+          
 
           $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $sender_accid . "','" . $receiver_accid . "','" . $amount . "')";
           mysqli_query($connection, $sql);
@@ -155,12 +163,7 @@ if (isset($_POST['btnTransfer'])) {
       if ($wallet_balance < $amount) {
         // Insufficient balance
         $error = "Insufficient wallet balance. ";
-        echo "<script language='javascript'>
-                $(document).ready(function() {
-                $('#user .errorMessage').prepend('$error');
-                $('#user').modal('show');
-            });
-            </script>";
+            echoMessage("user","errorMessage", $error);
       } else {
         
           // Update sender's balance
@@ -174,9 +177,13 @@ if (isset($_POST['btnTransfer'])) {
           $new_wallet_receiver_balance = $wallet_receiver_balance + $amount;
           updateVal($connection, "balance", $new_wallet_receiver_balance, "tblwallet", "wallet_id", $new_wallet_id);
 
+          $new_wallet_name = getWalletName($connection,$new_wallet_id);
+
+
           // Your transaction logic here
-          $success = "Transfer successful.";
-          echoMessage("success", "successMessage", $success);
+          $success = "Transfer to wallet ". $new_wallet_name." was successful.";
+          // echoMessage("success", "successMessage", $success);
+          pushNotification($connection, $acc_id,$success);
 
           // $sql = "Insert into tbltransaction(sender_id,receiver_id,amount) values('" . $acc_id . "','" . $acc_id . "','" . $amount . "')"; no transaction if self
           //mysqli_query($connection, $sql);
