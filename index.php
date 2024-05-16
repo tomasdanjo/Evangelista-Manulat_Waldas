@@ -178,8 +178,40 @@ include("actions/send_money.php");
         ?>
         
     </div>
+
+
 </div>
 
+<?php
+    $acc_type = getAccType($connection,$acc_id);
+    if($acc_type!="Full"){
+        echo '<form method="POST">
+        <input type="submit" value="Verify Account" name="verifyBtn">
+    </form>';
+    }
+
+    if(isset($_POST["verifyBtn"])){
+        echoMessage("success","successMessage", "Verify Button Clicked");
+    }
+
+?>
+
+
+<div class="modal fade" id="success" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Success!</h1>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <p class="successMessage"></p>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="continue">Continue</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <?php

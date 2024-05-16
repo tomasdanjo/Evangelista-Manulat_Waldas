@@ -210,3 +210,17 @@ function deleteWallet($connection,$wallet_id){
   return $wallet_balance;
 }
 
+function readAllNotifs($connection,$acc_id){
+  $sql = "Select notif_id from tblnotifs where account_id = ".$acc_id;
+  $result = mysqli_query($connection,$sql);
+  while($row =  mysqli_fetch_assoc($result)){
+    $notif_id = $row["notif_id"];
+    readNotif($connection,$notif_id);
+  }
+}
+
+function readNotif($connection,$notif_id){
+  $sql = "UPDATE tblnotifs set isRead = 1 where notif_id = ".$notif_id;
+  return mysqli_query($connection,$sql);
+}
+
