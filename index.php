@@ -33,7 +33,7 @@ include("actions/send_money.php");
                                     if($res["name"]!="Main"){
                                         echo '<button class="btnDelete" data-bs-toggle="modal" data-bs-target="#deleteWallet_'.$res["wallet_id"].'">X</button>';
                                     }
-                                        echo '<h3><b style="margin-left: 10px">W</b></h3>
+                                        echo '<h3><b style="margin-left: 10px;color: #ffffff;">W</b></h3>
                                         <p><b>'.$res["name"].'</b></p>
                                     </div>
                                     <div class="acctNum">
@@ -139,7 +139,7 @@ include("actions/send_money.php");
                     $res = mysqli_fetch_assoc($row);
                         echo '<div class="waldasCard">
                                     <div class="container">
-                                        <h3><b style="margin-left: 10px">W</b></h3>
+                                        <h3><b style="margin-left: 10px;color: #ffffff;">W</b></h3>
                                         <p>PHP<b>'.$res["balance"].'</b></p>
                                     </div>
                                     <div class="acctNum">
@@ -187,13 +187,14 @@ include("actions/send_money.php");
 
              
         }else{
-            echo'<div class="waldasCard">
+            echo'<div style="margin-top:100px"></div>
+            <div class="waldasCard">
                     <div class="container">
-                        <h3><b style="margin-left: 10px">W</b></h3>
-                        <p>PHP_<b> ***.**</b></p>
+                        <h3><b style="margin-left: 10px;color: #ffffff;">W</b></h3>
+                        <p>*******</p>
                     </div>
                     <div class="acctNum">
-                        <h2>************</h2>
+                        <h2>PHP <b>*****.**</b></h2>
                     </div>
                 </div>';
         }
