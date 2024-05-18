@@ -76,8 +76,13 @@ if (isset($_POST['btnLogin'])) {
             $actual_password =  getVal($connection, "acc_password", "tblacc", "user_id", $user_id);
         }
 
-
-
+        $acc_id = getVal($connection, "account_id", "tblacc", "user_id", $user_id);
+        $isFrozen = getVal($connection, "isFrozen", "tblacc", "account_id", $acc_id);
+        if($isFrozen==1){
+            $error = "Frozen account!";
+            echoMessage("user", "errorMessage", $error);
+            return;
+        }
 
         // Verify the password
         if (password_verify($pword, $actual_password)) {

@@ -24,7 +24,7 @@ if (file_exists('includes/header.php')) {
   </thead>
   <tbody>
     <?php
-    $sql = "Select * from tblacc";
+    $sql = "Select * from tblacc where isFrozen = 0";
     $result = mysqli_query($connection, $sql);
 
     $str = "";
@@ -40,7 +40,7 @@ if (file_exists('includes/header.php')) {
         $str .= "<td>" . $row["valid_government_id"] . "</td>";
         $str .= '<td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateAcc_' . $row["account_id"] . '">Update</button>';
 
-        $str .= '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAcc_' . $row["account_id"] . '">Delete</button>
+        $str .= '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAcc_' . $row["account_id"] . '">Freeze</button>
 
         <div class="modal fade" id="deleteAcc_' . $row["account_id"] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -132,9 +132,9 @@ if (file_exists('includes/header.php')) {
 
     if (isset($_POST["btnDelete"])) {
       $accID = $_POST["accID"];
-      $sql = "Delete from tblacc where account_id=" . $accID . "";
+      $sql = "UPDATE tblacc SET isFrozen = 1 where account_id='" . $accID . "'";
       if ($connection->query($sql) === TRUE) {
-        $success = "Successfully deleted account.";
+        $success = "Successfully froze account_id: " . $accID . ".";
         echoMessage("successUpdate", "successMessage", $success);
       } else {
         echo "Error deleting record: " . $connection->error;
@@ -169,7 +169,7 @@ if (file_exists('includes/header.php')) {
     ?>
   </tbody>
 </table>
-
+<a class="btn btn-danger" href="frozen.php">Access Frozen Accounts</a>
 <?php
 
 include("includes/footer3.php");
