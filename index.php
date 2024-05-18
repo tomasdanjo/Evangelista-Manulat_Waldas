@@ -6,12 +6,11 @@ include("actions/send_money.php");
 <div class="centercard">
     <div class="desc">
         <h2>Make your life easier.</h2>
+        <p>Simplify your transactions, send money in seconds, and enjoy unparalleled convenience. Waldas - Where convenience meets innovation.</p>
         <?php
             if(isset($_SESSION['username'])){
                 include_once('actions/create_wallet.php');
-                echo '<btn class="btn btnCreate" data-bs-toggle="modal" data-bs-target="#create-wallet">Create Wallet</button>';
-            }else{
-                echo '<p>Simplify your transactions, send money in seconds, and enjoy unparalleled convenience. Waldas - Where convenience meets innovation.</p>';
+                echo '<button class="btn btnCreate" data-bs-toggle="modal" data-bs-target="#create-wallet">Create Wallet</button>';
             }
             ?>
         
@@ -201,21 +200,19 @@ include("actions/send_money.php");
         ?>
         
     </div>
-
-
 </div>
 
 <?php
-    $acc_type = getAccType($connection,$acc_id);
-    if($acc_type!="Full"){
-        echo '<form method="POST">
-        <input type="submit" value="Verify Account" name="verifyBtn">
-    </form>';
-    }
+    // $acc_type = getAccType($connection,$acc_id);
+    // if($acc_type!="Full"){
+    //     echo '<form method="POST">
+    //     <input type="submit" value="Verify Account" name="verifyBtn">
+    // </form>';
+    // }
 
-    if(isset($_POST["verifyBtn"])){
-        echoMessage("success","successMessage", "Verify Button Clicked");
-    }
+    // if(isset($_POST["verifyBtn"])){
+    //     echoMessage("success","successMessage", "Verify Button Clicked");
+    // }
 
 ?>
 
@@ -272,3 +269,4 @@ include("includes/footer1.php");
     </div>
   </div>
 </div>
+

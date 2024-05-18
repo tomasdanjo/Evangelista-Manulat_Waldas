@@ -15,3 +15,4 @@
             link.classList.add('disabled');
         }
     });
+

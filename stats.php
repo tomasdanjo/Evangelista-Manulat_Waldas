@@ -76,11 +76,12 @@ include("includes/header.php");
 
     $sql = "SELECT AVG(total_balance) as averageBalance FROM tblacc";
     $result = mysqli_query($connection, $sql);
-
+    $averageData = array();
     // Display data in table rows
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["averageBalance"] . "</td>";
+      $averageData [] = intval($row["averageBalance"]);
     }
     ?>
   </tbody>
@@ -106,6 +107,7 @@ include("includes/header.php");
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["averageFlow"] . "</td>";
+      $averageData [] = intval($row["averageFlow"]);
     }
     ?>
   </tbody>
@@ -127,11 +129,12 @@ include("includes/header.php");
 
     $sql = "SELECT COUNT(transaction_id) as totalToday FROM tbltransaction where DAY(timestamp) = DAY(CURRENT_DATE())";
     $result = mysqli_query($connection, $sql);
-
+    $transactionsData = array();
     // Display data in table rows
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["totalToday"] . "</td>";
+      $transactionsData[] = intval($row["totalToday"]);
     }
 
     $sql = "SELECT COUNT(transaction_id) as totalYesterday FROM tbltransaction where DAY(timestamp) = DAY(CURRENT_DATE()-1)";
@@ -141,6 +144,7 @@ include("includes/header.php");
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       echo "<td>" . $row["totalYesterday"] . "</td>";
+      $transactionsData[] = intval($row["totalYesterday"]);
     }
     ?>
   </tbody>
@@ -179,10 +183,10 @@ include("includes/header.php");
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart2);
+      google.charts.setOnLoadCallback(drawChart3);
 
       function drawChart() {
-
-        const jsondata = <?php echo $json_data;?>;
         
         var data = google.visualization.arrayToDataTable([
           ['Account Type', 'Total Number'],
@@ -192,15 +196,74 @@ include("includes/header.php");
         ]);
 
         var options = {
-          title: 'Total Accounts'
+          title: 'Total Accounts',
+          backgroundColor: "#9b8621"
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
         chart.draw(data, options);
       }
+
+      function drawChart2() {
+      var data = google.visualization.arrayToDataTable([
+        ["Day", "Transactions", { role: "style" } ],
+        ["Yesterday", <?php echo $transactionsData[1]?>, "silver"],
+        ["Today", <?php echo $transactionsData[0]?>, "gold"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Day-to-day Transactions",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+        backgroundColor: "#9b8621"
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchartTransaction"));
+      chart.draw(view, options);
+    }
+
+      function drawChart3() {
+      var data = google.visualization.arrayToDataTable([
+        ["Average", "Money", { role: "style" } ],
+        ["Average Balance", <?php echo $averageData[0]?>, "silver"],
+        ["Average Flow", <?php echo $averageData[1]?>, "gold"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Average Balance vs Average Flow",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+        backgroundColor: "#9b8621"
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchartAverage"));
+      chart.draw(view, options);
+    }
     </script>
   </head>
   <body>
-    <div style="margin-left: auto; margin-right: auto;" id="piechart" style="width: 900px; height: 500px;"></div>
+    <div style="margin-left: auto; margin-right: auto; margin-bottom: 20px; width: 900px; height: 500px;" id="piechart" ></div>
+    <div style="margin-left: auto; margin-right: auto; margin-bottom: 20px; width: 600px; height: 400px;" id="columnchartAverage"></div>
+    <div style="margin-left: auto; margin-right: auto; margin-bottom: 20px; width: 600px; height: 400px;" id="columnchartTransaction"></div>
   </body>
+
+  

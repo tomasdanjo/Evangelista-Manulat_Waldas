@@ -224,3 +224,40 @@ function readNotif($connection,$notif_id){
   return mysqli_query($connection,$sql);
 }
 
+
+function getUnreadNotifs($connection, $value)
+{
+  $sql = "Select * from tblnotifs where isRead = 0 and account_id = '" . $value . "' ORDER BY timestamp DESC";
+  $retval = mysqli_query($connection, $sql);
+  if (!$retval) {
+    die('Error: ' . mysqli_error($connection));
+  }
+  if (mysqli_num_rows($retval) > 0) {
+    return $retval;
+  } else {
+  
+    return null;
+  }
+}
+
+function getReadNotifs($connection, $value)
+{
+  $sql = "Select * from tblnotifs where isRead = 1 and account_id = '" . $value . "' ORDER BY timestamp DESC";
+  $retval = mysqli_query($connection, $sql);
+  if (!$retval) {
+    die('Error: ' . mysqli_error($connection));
+  }
+  if (mysqli_num_rows($retval) > 0) {
+    return $retval;
+  } else {
+  
+    return null;
+  }
+}
+
+function markedAsRead($connection, $value)
+{
+  $sql = "Update tblnotifs Set  isRead = '1' Where account_id = '" . $value ."' and isRead = '0'";
+
+  mysqli_query($connection, $sql);
+}
